@@ -1,9 +1,21 @@
 # sharedlib
 
-[![PyPI version](https://img.shields.io/pypi/v/sharedlib)](https://pypi.python.org/pypi/sharedliv/)
-[![PyPI Supported Python Versions](https://img.shields.io/pypi/pyversions/sharedlib.svg)](https://pypi.python.org/pypi/sharedliv/)
+[![PyPI version](https://img.shields.io/pypi/v/sharedlib)](https://pypi.python.org/pypi/sharedlib/)
+[![PyPI Supported Python Versions](https://img.shields.io/pypi/pyversions/sharedlib.svg)](https://pypi.python.org/pypi/sharedlib/)
 
 Pythonic way for use "shared" folder of packages (utils).
+
+## Install package
+
+Install using `pip`:
+```bash
+pip install sharedlib
+```
+
+Install using `uv`:
+```bash
+uv add sharedlib
+```
 
 ## Usage
 
@@ -69,3 +81,11 @@ You can also use `pyproject.toml` for customization:
 folder_name = "custom_shared"
 import_name = "my_shared_pkg"
 ```
+
+## Contributing
+
+If you would like to suggest a new feature, you can create an issue on the GitHub repository for this project. Also you can fork the repository and submit a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more information.
