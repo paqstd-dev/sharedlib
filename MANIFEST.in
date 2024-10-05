@@ -1,0 +1,7 @@
+include LICENSE
+include README.md
+recursive-include sharedlib/ *
+
+exclude uv.lock
+global-exclude */__pycache__/*
+global-exclude *.pyc
