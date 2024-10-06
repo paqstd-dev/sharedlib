@@ -3,7 +3,8 @@
 [![PyPI version](https://img.shields.io/pypi/v/sharedlib)](https://pypi.python.org/pypi/sharedlib/)
 [![PyPI Supported Python Versions](https://img.shields.io/pypi/pyversions/sharedlib.svg)](https://pypi.python.org/pypi/sharedlib/)
 
-Pythonic way for use "shared" folder of packages (utils).
+Pythonic way for use "shared" folder of packages in monorepo.
+Without dependencies!
 
 ## Install package
 
@@ -17,7 +18,7 @@ Install using `uv`:
 uv add sharedlib
 ```
 
-## Usage
+## Local usage
 
 First, we need to import “sharedlib” into the file where we will use the shared packages: 
 
@@ -56,11 +57,51 @@ from my_shared_pkg.a.b.c import d
 print(a, b, c, d)
 ```
 
+> Shared module should have `__init__.py` file by default. This limitation will be fixed later.  
+
+### An example of a file structure:  
+```
+service1/
+    venv/
+    main.py
+    requirements.txt
+    ...
+service2/
+    venv/
+    main.py
+    requirements.txt
+    ...
+common/
+    __init__.py
+    ...
+pyproject.toml
+sharedlib.ini
+```
+
+## Docker usage
+
+You can also use Docker to work with a monorepository. To configure the shared module, you need to add the shared folder to the service container. 
+
+```Dockerfile
+# you can use any python >= 3.8
+FROM python:3.12-slim
+
+# ...before logic
+COPY ./service1 /app
+COPY ./common /common
+COPY sharedlib.ini sharedlib.ini
+
+WORKDIR /app
+# ...after logic
+```
+
 ## Configuration file
 
-### `sharedlib.ini`
+The order of configuration search is simple - first look at the pyproject.toml file. Then look at sharedlib.ini file - this file has priority over pyproject.toml because it is an explicit config.   
 
-To work with “sharedlib” it is necessary to specify the file `sharedlib.ini` in the root of the project (repository):
+If both files are configured, sharedlib.ini will overwrite all settings.   
+
+### `sharedlib.ini`
 
 ```ini
 [sharedlib]
@@ -68,13 +109,9 @@ folder_name = custom_shared
 import_name = my_shared_pkg
 ```
 
-If the file is not found, an exception will be raised. 
-
 > Important: The configuration file must be located in the root of the project. Otherwise imports will not work properly. 
 
 ### `pyproject.toml`
-
-You can also use `pyproject.toml` for customization:
 
 ```toml
 [tool.sharedlib]

@@ -6,8 +6,8 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True, slots=True)
 class _config:
-    folder_name: str = "shared"
-    import_name: str = "_shared"
+    folder_name: str  # e.g. shared
+    import_name: str  # e.g. _shared
 
 
 _CONFIG_SECTION = "sharedlib"
@@ -22,10 +22,10 @@ def _get_config() -> tuple[_config, str]:
     current_dir = os.path.dirname(__file__)
 
     while True:
-        # Search for pyproject.toml
-        pyproject_file_path = os.path.join(current_dir, _PYPROJECT_FILENAME)
         file_content = None
 
+        # Search for pyproject.toml
+        pyproject_file_path = os.path.join(current_dir, _PYPROJECT_FILENAME)
         if os.path.exists(pyproject_file_path):
             with open(pyproject_file_path, "rb") as f:
                 pyproject_data = tomllib.load(f)

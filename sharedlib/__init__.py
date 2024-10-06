@@ -1,5 +1,5 @@
 """
-Pythonic way for use "shared" folder of packages (utils).
+Pythonic way for use "shared" folder of packages in monorepo.
 
 ```py
 # file: service1/routes/admin.py

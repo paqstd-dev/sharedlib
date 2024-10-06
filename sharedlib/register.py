@@ -6,7 +6,7 @@ from .config import _get_config
 
 def _register():
     """
-    Register a virtual module with "custom" name.
+    Register a virtual module with "config.import_name" name.
     """
     config, path = _get_config()
 
